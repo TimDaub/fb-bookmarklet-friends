@@ -1,0 +1,11 @@
+javascript:var xhr = new XMLHttpRequest();
+xhr.open("GET", location.href, false);
+xhr.send();
+var source = xhr.responseText;
+source = source.substring((source.search("InitialChatFriendsList")+36), (source.search("\"ChatSidebar\",")));
+var ids = source.split("\",\"");
+ids[0] = ids[0].substring(1);
+ids[ids.length-1] = ids[ids.length-1].substring(0, ids[ids.length-1].search("\"]}]"));
+var postString = "";
+for(var i=0;i<ids.length;i++) postString=postString+'<img src="http://graph.facebook.com/'+ids[i]+'/picture?type=square">';
+document.body.innerHTML=postString;
